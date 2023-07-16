@@ -1,19 +1,33 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import classNames from "classnames";
 import Link from "next/link";
 import { Federant } from "next/font/google";
 import { Duplex } from "stream";
 import { document } from "postcss";
 import SideBar from "./savebar";
+import { useRouter } from "next/navigation";
 
 // @refresh reset
 
 export default function Home(prop) {
+  const router = useRouter();
   const [HomeData, setHomeData] = useState(null);
+  const [savebar, setSaveBar] = useState(null);
 
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState(null);
+
+  const [isCollapsible, setIsCollapsible] = useState(false);
+
+  const wrapperClasses = classNames(" overflow-hidden", {
+    ["w-96"]: !savebar,
+    ["w-0"]: savebar,
+  });
+  const handleOpen = (reason) => {
+    setSaveBar(!savebar);
+  };
 
   const fetchData = async () => {
     try {
@@ -29,6 +43,12 @@ export default function Home(prop) {
   function test() {
     setMessage(getJsonData());
     fetchData();
+  }
+  function signUp() {
+    router.push("/signup");
+  }
+  function signIn() {
+    router.push("/signin");
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,24 +67,54 @@ export default function Home(prop) {
     } catch (error) {
       console.error("Error submitting data:", error);
     }
-
-    const handleOpen = (reason) => {
-      prop(true);
-    };
   };
+
   return (
-    <main className="flex min-h-screen overflow-hidden">
+    <main className=" min-h-screen">
       <div className="flex flex-row">
-        <SideBar></SideBar>
-        <div>
-          <div className="flex justify-center items-center  w-screen bg-violet-700 w-screen p-8 shadow-md">
-            <a>
-              <h1 className="text-3xl font-bold">ValueX </h1>
-            </a>
+        <div
+          className={wrapperClasses}
+          style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
+        >
+          <SideBar></SideBar>
+        </div>
+
+        <div className="flex flex-col w-full">
+          <div className="flex  bg-violet-700 p-8 shadow-md  justify-between ">
+            <div className="flex flex-row">
+              <button className="pr-10" onClick={handleOpen}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={3}
+                  stroke="currentColor"
+                  className="w-10 h-10"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                  />
+                </svg>
+              </button>
+
+              <a>
+                <h1 className="text-3xl font-bold">ValueX </h1>
+              </a>
+            </div>
+            <div class="flex space-x-4">
+              <button onClick={signUp}>
+                <label>Sign Up</label>
+              </button>
+              <button onClick={signIn}>
+                <label>Sign In</label>
+              </button>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center">
+          <div className="flex  justify-center">
             {/* ml-[500px] mr-[500px] */}
-            <div className=" rounded-3xl shadow-xl shadow-[#000000]   shadow-inner bg-slate-100  pl-24 pr-24 py-10 mt-10">
+            <div className=" rounded-3xl shadow-xl justify-self  bg-slate-100  pl-24 pr-24 py-10 mt-10">
               <div className="flex text-black text-[25px] font-bold justify-center">
                 <p> House Price Predictor</p>
               </div>
