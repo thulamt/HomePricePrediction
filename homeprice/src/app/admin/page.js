@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useCallback } from "react";
+import { format } from "date-fns";
 import { updateCount } from "@/app/savebar";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,8 @@ import firebase_app from "@/firebase/config";
 import addData from "@/firebase/firestore/addData";
 import { Arapey } from "next/font/google";
 import getData from "@/firebase/firestore/getData";
+import { homedir } from "os";
+import Home from "../page";
 
 const auth = getAuth(firebase_app);
 
@@ -43,7 +46,56 @@ export default function Page() {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState(null);
 
-  const [isCollapsible, setIsCollapsible] = useState(false);
+  // state for input fields
+  const [y_built, setYBuilt_Field] = useState("");
+  const [y_renovated, setYRenovated_Field] = useState("");
+  const [num_bedroom, setBed_Field] = useState("");
+  const [num_bath, setBath_Field] = useState("");
+  const [num_floor, setFloor_Field] = useState("");
+  const [basement, setBasement_Field] = useState("");
+  const [lot, setLot_Field] = useState("");
+  const [living, setLiving_Field] = useState("");
+  const [roof, setRoof_Field] = useState("");
+
+  const handle_Y_built = (event) => {
+    setYBuilt_Field(event.target.date);
+    setYearBuilt(event.target.value);
+  };
+  const handle_Y_renovated = (event) => {
+    setYRenovated_Field(event.target.value);
+    setRenovated(event.target.value);
+  };
+  const handle_Num_bedroom = (event) => {
+    setBed_Field(event.target.value);
+    setBedroom(event.target.value);
+  };
+  const handle_Num_bathroom = (event) => {
+    setBath_Field(event.target.value);
+    setBath(event.target.value);
+  };
+  const handle_Num_floor = (event) => {
+    setFloor_Field(event.target.value);
+    setFloor(event.target.value);
+  };
+  const handle_Living = (event) => {
+    setLiving_Field(event.target.value);
+    setLiving(event.target.value);
+  };
+
+  const handle_basement = (event) => {
+    setBasement_Field(event.target.value);
+    setBasement(event.target.value);
+  };
+  const handle_roof = (event) => {
+    setRoof_Field(event.target.value);
+    setRoof(event.target.value);
+  };
+  const handle_lot = (event) => {
+    setLot_Field(event.target.value);
+    setLot(event.target.value);
+  };
+
+  ///////////////////////
 
   const wrapperClasses = classNames(" overflow-hidden", {
     ["w-[480px]"]: !savebar,
@@ -123,6 +175,7 @@ export default function Page() {
       setCount(count + 1);
     }
   };
+
   useEffect(() => {
     handleForm2();
     return () => {};
@@ -143,6 +196,30 @@ export default function Page() {
     }
   };
 
+  const autoFill = (key) => {
+    let data = getResult();
+    let homeData = data[key];
+    setYBuilt_Field(`${homeData.built}-01-01`);
+    setYRenovated_Field(`${homeData.renovated}-01-01`);
+    // console.log("year", `${homeData.renovated}-01-01`, homeData.renovated);
+
+    setBed_Field(homeData.bed);
+    setBedroom(homeData.bed);
+    setBath_Field(homeData.bath);
+    setBath(homeData.bath);
+    setFloor_Field(homeData.floor);
+    setFloor(homeData.floor);
+    setBasement_Field(homeData.basement);
+    setBasement(homeData.basement);
+    setLot_Field(homeData.lot);
+    setLot(homeData.lot);
+    setLiving_Field(homeData.living);
+    setLiving(homeData.living);
+    setRoof_Field(homeData.roof);
+    setRoof(homeData.roof);
+    //setYBuilt_Field(homeData.built);
+  };
+
   return (
     <main className=" min-h-screen">
       <div className="flex flex-row">
@@ -150,26 +227,34 @@ export default function Page() {
           className={wrapperClasses}
           style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
         >
-          <div className="relative shadow-2xl  max-h-screen shadow-innder bg-gradient-to-b from-[#581db5] to-[#5500b6] ease-in-out duration-300 left-0 w-96">
+          {/* bg-gradient-to-b from-[#581db5] to-[#5500b6] */}
+          <div className="relative shadow-2xl  min-h-screen max-h-screen shadow-innder bg-white ease-in-out duration-300 left-0 w-96">
             <div className="flex   flex-row  p-9">
-              <div className=" w-4/6 font-bold text-white text-2xl">
+              <div className=" w-4/6 font-bold text-black text-2xl">
                 <p> Homes</p>
               </div>
             </div>
             {/* bg-violet-700 */}
-            <div className="flex w-full min-h-screen max-h-screen justify-center ">
-              <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto   shadow-[#3b0696] shadow-2xl drop-shadow-lg rounded-lg ">
+            <div className="flex w-full h-full  justify-center ">
+              {/*                <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto     bg-slate-100 shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-lg ">
+               */}
+              <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto  max-h-screen  min-h-screen  bg-white shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-xl  ">
                 <div className="hidden"> {count}</div>
 
                 {Object.keys(getResult()).map((key) => (
                   <div className="flex flex-row justify-center items-center ">
-                    <div className=" flex justify-center items-center w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-2xl bg-white  text-white">
-                      <label className=" text-xl text-black">{key}</label>
-                    </div>
+                    <button
+                      // className=" flex justify-center items-center  text-xl text-white  w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-xl  "
+                      className="bg-violet-600 hover:bg-violet-400 text-xl  text-white-800 font-bold  w-11/12 mt-5 w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg  shadow-lg shadow-[#4e26ab]  items-center"
+                      onClick={() => autoFill(key)}
+                      placeholder={key}
+                    >
+                      {key}
+                    </button>
                     <button
                       type="button"
                       id={key}
-                      className=" flex justify-center items-center bg-rose-500 h-14 rounded-r-lg hover:scale-90  transition delay-150 duration-300 ease-in-out"
+                      className=" flex justify-center items-center bg-rose-500 h-14 rounded-r-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#ff675c]"
                       onClick={() => deleteDoc(key)}
                     >
                       <svg
@@ -245,8 +330,10 @@ export default function Page() {
                     <input
                       className="rounded-md shadow-2xl w-full py-2  sm:text-md dark:text-black px-10"
                       type="date"
+                      id="in_built"
                       placeholder="0"
-                      onChange={(e) => setYearBuilt(e.target.value)}
+                      value={y_built}
+                      onChange={handle_Y_built}
                     />
                   </div>
                   <div>
@@ -255,7 +342,8 @@ export default function Page() {
                       className="rounded-md  shadow-2xl w-full py-2  sm:text-md dark:text-black px-10"
                       type="date"
                       placeholder="0"
-                      onChange={(e) => setRenovated(e.target.value)}
+                      value={y_renovated}
+                      onChange={handle_Y_renovated}
                     />
                   </div>
                 </div>
@@ -266,7 +354,8 @@ export default function Page() {
                       className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
-                      onChange={(e) => setBedroom(e.target.value)}
+                      value={num_bedroom}
+                      onChange={handle_Num_bedroom}
                     />
                   </div>
                   <div>
@@ -275,7 +364,8 @@ export default function Page() {
                       className="rounded-md shadow-2xl   w-full py-2 px-5 sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
-                      onChange={(e) => setBath(e.target.value)}
+                      value={num_bath}
+                      onChange={handle_Num_bathroom}
                     />
                   </div>
                 </div>
@@ -286,7 +376,8 @@ export default function Page() {
                       className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
-                      onChange={(e) => setFloor(e.target.value)}
+                      value={num_floor}
+                      onChange={handle_Num_floor}
                     />
                   </div>
                   <div>
@@ -295,6 +386,8 @@ export default function Page() {
                       className="rounded-md   shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
+                      value={lot}
+                      onChange={handle_lot}
                     />
                   </div>
                 </div>
@@ -305,7 +398,8 @@ export default function Page() {
                       className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
-                      onChange={(e) => setLiving(e.target.value)}
+                      value={living}
+                      onChange={handle_Living}
                     />
                   </div>
                   <div>
@@ -314,7 +408,8 @@ export default function Page() {
                       className="rounded-md shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
-                      onChange={(e) => setRoof(e.target.value)}
+                      value={roof}
+                      onChange={handle_roof}
                     />
                   </div>
                 </div>
@@ -450,6 +545,7 @@ function getJsonData(i) {
       year_built,
       y_renovated,
     ];
+    console;
     return array;
   } else if (i == 1) {
     const array = {
@@ -464,6 +560,8 @@ function getJsonData(i) {
       renovated: y_renovated,
       name: houseName,
     };
+    houseName = "";
+
     return array;
   }
 
@@ -474,8 +572,6 @@ let data = {};
 
 function setResult(p) {
   data = p;
-
-  console.log("testing", data);
 }
 
 function getResult() {

@@ -990,6 +990,9 @@ video {
 .to-white {
   --tw-gradient-to: #fff var(--tw-gradient-to-position);
 }
+.to-\[\#5500c9\] {
+  --tw-gradient-to: #5500c9 var(--tw-gradient-to-position);
+}
 .p-10 {
   padding: 2.5rem;
 }
@@ -1172,6 +1175,18 @@ video {
   --tw-shadow-color: #4f4f4f;
   --tw-shadow: var(--tw-shadow-colored);
 }
+.shadow-\[\#17023b\] {
+  --tw-shadow-color: #17023b;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+.shadow-\[\#\#ff675c\] {
+  --tw-shadow-color: ##ff675c;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+.shadow-\[\#ff675c\] {
+  --tw-shadow-color: #ff675c;
+  --tw-shadow: var(--tw-shadow-colored);
+}
 .outline {
   outline-style: solid;
 }
@@ -1181,11 +1196,24 @@ video {
 .outline-1 {
   outline-width: 1px;
 }
+.outline-\[10px\] {
+  outline-width: 10px;
+}
+.outline-\[6px\] {
+  outline-width: 6px;
+}
 .outline-slate-100 {
   outline-color: #f1f5f9;
 }
+.outline-\[black\] {
+  outline-color: black;
+}
 .drop-shadow-lg {
   --tw-drop-shadow: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.drop-shadow-xl {
+  --tw-drop-shadow: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition {

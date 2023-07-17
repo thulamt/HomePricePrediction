@@ -88,17 +88,17 @@
         "async": false
       }
     },
-    "(app-client)/./src/app/signup/page.js": {
+    "(app-client)/./src/app/layout.js": {
       "*": {
-        "id": "(sc_client)/./src/app/signup/page.js",
+        "id": "(sc_client)/./src/app/layout.js",
         "name": "*",
         "chunks": [],
         "async": false
       }
     },
-    "(app-client)/./src/app/admin/page.js": {
+    "(app-client)/./src/app/signup/page.js": {
       "*": {
-        "id": "(sc_client)/./src/app/admin/page.js",
+        "id": "(sc_client)/./src/app/signup/page.js",
         "name": "*",
         "chunks": [],
         "async": false
@@ -112,9 +112,9 @@
         "async": false
       }
     },
-    "(app-client)/./src/app/layout.js": {
+    "(app-client)/./src/app/admin/page.js": {
       "*": {
-        "id": "(sc_client)/./src/app/layout.js",
+        "id": "(sc_client)/./src/app/admin/page.js",
         "name": "*",
         "chunks": [],
         "async": false
@@ -331,19 +331,19 @@
       ],
       "async": false
     },
+    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/layout.js": {
+      "id": "(app-client)/./src/app/layout.js",
+      "name": "*",
+      "chunks": [
+        "app/layout:static/chunks/app/layout.js"
+      ],
+      "async": false
+    },
     "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/signup/page.js": {
       "id": "(app-client)/./src/app/signup/page.js",
       "name": "*",
       "chunks": [
         "app/signup/page:static/chunks/app/signup/page.js"
-      ],
-      "async": false
-    },
-    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/admin/page.js": {
-      "id": "(app-client)/./src/app/admin/page.js",
-      "name": "*",
-      "chunks": [
-        "app/admin/page:static/chunks/app/admin/page.js"
       ],
       "async": false
     },
@@ -355,29 +355,17 @@
       ],
       "async": false
     },
-    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/layout.js": {
-      "id": "(app-client)/./src/app/layout.js",
+    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/admin/page.js": {
+      "id": "(app-client)/./src/app/admin/page.js",
       "name": "*",
       "chunks": [
-        "app/layout:static/chunks/app/layout.js"
+        "app/admin/page:static/chunks/app/admin/page.js"
       ],
       "async": false
     }
   },
   "entryCSSFiles": {
     "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/page": {
-      "modules": [],
-      "files": []
-    },
-    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/signup/page": {
-      "modules": [],
-      "files": []
-    },
-    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/admin/page": {
-      "modules": [],
-      "files": []
-    },
-    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/signin/page": {
       "modules": [],
       "files": []
     },
@@ -389,6 +377,18 @@
       "files": [
         "static/css/app/layout.css"
       ]
+    },
+    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/signup/page": {
+      "modules": [],
+      "files": []
+    },
+    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/signin/page": {
+      "modules": [],
+      "files": []
+    },
+    "/Users/macbook/Documents/GitHub/HomePricePrediction/homeprice/src/app/admin/page": {
+      "modules": [],
+      "files": []
     }
   }
 }
