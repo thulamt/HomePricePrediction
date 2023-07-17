@@ -7,7 +7,9 @@ export default function Page() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
-
+  function gotoSignUp() {
+    router.push("/signup");
+  }
   const handleForm = async (event) => {
     event.preventDefault();
 
@@ -29,7 +31,10 @@ export default function Page() {
             <h1 className=" flex justify-center pb-10    text-black">
               Create an Account
             </h1>
-            <form onSubmit={handleForm} className="flex flex-col space-y-24">
+            <form
+              onSubmit={handleForm}
+              className="flex flex-col space-y-[80px]"
+            >
               <label htmlFor="email">
                 <p className="text-black">Email</p>
                 <input
@@ -54,12 +59,20 @@ export default function Page() {
                   placeholder="password"
                 />
               </label>
-              <button
-                className="bg-violet-600 hover:bg-violet-400 text-[20px]  text-white-800 font-bold py-4 px-20 rounded-xl  shadow-lg shadow-[#4e26ab]  items-center"
-                type="submit"
-              >
-                Sign Up
-              </button>
+              <div className="flex flex-row space-x-10">
+                <button
+                  className="bg-gray-600 hover:bg-gray-400 text-[20px]  text-white-800 font-bold  py-2 px-10 rounded-xl  shadow-lg shadow-[#4f4f4f]  items-center"
+                  type="submit"
+                >
+                  Sign In
+                </button>
+                <button
+                  className="bg-violet-600 hover:bg-violet-400 text-[20px]  text-white-800 font-bold  py-2 px-10 rounded-xl  shadow-lg shadow-[#4e26ab]  items-center"
+                  onClick={gotoSignUp}
+                >
+                  Sign Up
+                </button>
+              </div>
             </form>
           </div>
         </div>

@@ -111,11 +111,17 @@ export default function Home(prop) {
               </a>
             </div>
             <div class="flex space-x-4">
-              <button onClick={signUp}>
-                <label>Sign Up</label>
+              <button
+                className="bg-slate-100 pr-5 pl-5   hover:scale-125 transition delay-150 duration-300 ease-in-out rounded shadow-md"
+                onClick={signUp}
+              >
+                <label className="text-black">Sign Up</label>
               </button>
-              <button onClick={signIn}>
-                <label>Sign In</label>
+              <button
+                className=" bg-violet-600 pr-5 pl-5 rounded shadow-md hover:scale-125 transition delay-150 duration-300 ease-in-out"
+                onClick={signIn}
+              >
+                <label className="text-white   ">Sign In</label>
               </button>
             </div>
           </div>
