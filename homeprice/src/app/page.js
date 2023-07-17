@@ -29,7 +29,7 @@ export default function Home(prop) {
   const [isCollapsible, setIsCollapsible] = useState(false);
 
   const wrapperClasses = classNames(" overflow-hidden", {
-    ["w-96"]: !savebar,
+    ["w-[480px]"]: !savebar,
     ["w-0"]: savebar,
   });
   const handleOpen = (reason) => {
@@ -79,33 +79,9 @@ export default function Home(prop) {
   return (
     <main className=" min-h-screen">
       <div className="flex flex-row">
-        <div
-          className={wrapperClasses}
-          style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
-        >
-          <SideBar></SideBar>
-        </div>
-
         <div className="flex flex-col w-full">
           <div className="flex  bg-violet-700 p-8 shadow-md  justify-between ">
             <div className="flex flex-row">
-              <button className="pr-10" onClick={handleOpen}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={3}
-                  stroke="currentColor"
-                  className="w-10 h-10"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-                  />
-                </svg>
-              </button>
-
               <a>
                 <h1 className="text-3xl font-bold">ValueX </h1>
               </a>
@@ -250,12 +226,6 @@ export default function Home(prop) {
                     </p>
                   </div>
                   <div class="flex  justify-center p-6 space-x-10  rounded-b dark:border-gray-600">
-                    <button
-                      type="button"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      Save
-                    </button>
                     <button
                       data-modal-hide="small-modal"
                       type="button"

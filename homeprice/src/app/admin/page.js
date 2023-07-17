@@ -5,10 +5,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useCallback } from "react";
+import { updateCount } from "@/app/savebar";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import SideBar from "@/app/savebar";
 import firebase_app from "@/firebase/config";
+import addData from "@/firebase/firestore/addData";
+import { Arapey } from "next/font/google";
+import getData from "@/firebase/firestore/getData";
 
 const auth = getAuth(firebase_app);
 
@@ -18,6 +22,7 @@ export default function Page() {
   useEffect(() => {
     if (user == null) {
       router.push("/");
+    } else {
     }
   }, [user]);
 
@@ -32,6 +37,8 @@ export default function Page() {
   const router = useRouter();
   const [HomeData, setHomeData] = useState(null);
   const [savebar, setSaveBar] = useState(null);
+  const [count, setCount] = useState(0);
+  const [delDoc, SetDelDoc] = useState(0);
 
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState(null);
@@ -39,7 +46,7 @@ export default function Page() {
   const [isCollapsible, setIsCollapsible] = useState(false);
 
   const wrapperClasses = classNames(" overflow-hidden", {
-    ["w-96"]: !savebar,
+    ["w-[480px]"]: !savebar,
     ["w-0"]: savebar,
   });
   const handleOpen = (reason) => {
@@ -58,7 +65,7 @@ export default function Page() {
   };
 
   function test() {
-    setMessage(getJsonData());
+    setMessage(getJsonData(0));
     fetchData();
   }
   function signUp() {
@@ -86,6 +93,56 @@ export default function Page() {
     }
   };
 
+  const handleForm = async () => {
+    const { result, error } = await addData(
+      "users" + "/" + auth.currentUser.uid + "/homedata",
+      getJsonData(1).name,
+      getJsonData(1)
+    );
+
+    if (error) {
+      return console.log(error);
+    }
+    handleForm2();
+    setResponse(false);
+  };
+
+  const handleForm2 = async () => {
+    const { result, error } = await getData(
+      "users" + "/" + auth.currentUser.uid + "/homedata",
+      auth.currentUser.uid,
+      "multi"
+    );
+
+    if (error) {
+      return console.log(error);
+    }
+    if (result) {
+      console.log("testing");
+      setResult(result);
+      setCount(count + 1);
+    }
+  };
+  useEffect(() => {
+    handleForm2();
+    return () => {};
+  }, []);
+  const deleteDoc = async (key) => {
+    const { result, error } = await getData(
+      "users" + "/" + auth.currentUser.uid + "/homedata",
+      key,
+      "del"
+    );
+
+    if (error) {
+      return console.log(error);
+    }
+    if (result) {
+      console.log("working");
+      handleForm2();
+    }
+  };
+
   return (
     <main className=" min-h-screen">
       <div className="flex flex-row">
@@ -93,7 +150,48 @@ export default function Page() {
           className={wrapperClasses}
           style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
         >
-          <SideBar></SideBar>
+          <div className="relative shadow-2xl  max-h-screen shadow-innder bg-gradient-to-b from-[#581db5] to-[#5500b6] ease-in-out duration-300 left-0 w-96">
+            <div className="flex   flex-row  p-9">
+              <div className=" w-4/6 font-bold text-white text-2xl">
+                <p> Homes</p>
+              </div>
+            </div>
+            {/* bg-violet-700 */}
+            <div className="flex w-full min-h-screen max-h-screen justify-center ">
+              <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto   shadow-[#3b0696] shadow-2xl drop-shadow-lg rounded-lg ">
+                <div className="hidden"> {count}</div>
+
+                {Object.keys(getResult()).map((key) => (
+                  <div className="flex flex-row justify-center items-center ">
+                    <div className=" flex justify-center items-center w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-2xl bg-white  text-white">
+                      <label className=" text-xl text-black">{key}</label>
+                    </div>
+                    <button
+                      type="button"
+                      id={key}
+                      className=" flex justify-center items-center bg-rose-500 h-14 rounded-r-lg hover:scale-90  transition delay-150 duration-300 ease-in-out"
+                      onClick={() => deleteDoc(key)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                        stroke="currentColor"
+                        className="w-5 h-5 "
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-col w-full">
@@ -104,14 +202,18 @@ export default function Page() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={3}
+                  strokeWidth={2}
                   stroke="currentColor"
                   className="w-10 h-10"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                    d={
+                      !savebar
+                        ? "M6 18L18 6M6 6l12 12"
+                        : " M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                    }
                   />
                 </svg>
               </button>
@@ -121,8 +223,11 @@ export default function Page() {
               </a>
             </div>
             <div class="flex space-x-4">
-              <button onClick={handleSignOut}>
-                <label>Sign Out</label>
+              <button
+                className="bg-slate-100 pr-5 pl-5   hover:scale-125 transition delay-150 duration-300 ease-in-out rounded shadow-md"
+                onClick={handleSignOut}
+              >
+                <label className="text-black">Sign Out</label>
               </button>
             </div>
           </div>
@@ -215,11 +320,6 @@ export default function Page() {
                 </div>
                 <div className="flex flex-row space space-x-20">
                   <form onSubmit={handleSubmit}>
-                    {/* <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            /> */}
                     <button
                       className="bg-violet-600 hover:bg-violet-400 text-[20px]  text-white-800 font-bold py-4 px-20 rounded-xl  shadow-lg shadow-[#4e26ab]  items-center"
                       onClick={test}
@@ -231,45 +331,48 @@ export default function Page() {
                 </div>
               </div>
             </div>
-          </div>
-          {response && (
-            <div
-              id="small-modal"
-              tabindex="-1"
-              className="fixed  z-50  w-full  overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
-            >
-              <div className="grid place-items-center w-full  h-full ">
-                <div className="relative w-96 rounded-lg shadow-xl border-p bg-gradient-to-r from-white to-white ">
-                  <div className="flex items-center justify-center   p-5  rounded-t ">
-                    <h3 className="text-xl font-medium text-gray-900 dark:text-black">
-                      Home Price Prediction
-                    </h3>
-                  </div>
-                  <div className="flex justify-center p-6  space-y-6">
-                    <p className="text-base text-lg leading-relaxed text-gray-500 dark:text-gray-400">
-                      {response.message}
-                    </p>
-                  </div>
-                  <div class="flex  justify-center p-6 space-x-10  rounded-b dark:border-gray-600">
-                    <button
-                      type="button"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      Save
-                    </button>
-                    <button
-                      data-modal-hide="small-modal"
-                      type="button"
-                      className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                      onClick={() => setResponse(false)}
-                    >
-                      Close
-                    </button>
+            {response && (
+              <div id="small-modal" tabindex="-1" className="fixed h-full ">
+                <div className="flex justify-center items-center  h-full ">
+                  <div className="relative w-96 rounded-lg shadow-xl border-p bg-gradient-to-r from-white to-white ">
+                    <div className="flex items-center justify-center   p-5  rounded-t ">
+                      <h3 className="text-xl font-medium text-gray-900 dark:text-black">
+                        Home Price Prediction
+                      </h3>
+                    </div>
+                    <div className="flex flex-col justify-center items-center p-6  space-y-6">
+                      <p className="text-base text-lg leading-relaxed text-gray-500 dark:text-gray-700">
+                        {response.message}
+                      </p>
+                      <input
+                        className="rounded-md shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
+                        type="name"
+                        placeholder="Name for the Home"
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div class="flex  justify-center p-6 space-x-10  rounded-b dark:border-gray-600">
+                      <button
+                        type="button"
+                        onClick={handleForm}
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      >
+                        Save
+                      </button>
+                      <button
+                        data-modal-hide="small-modal"
+                        type="button"
+                        className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        onClick={() => setResponse(false)}
+                      >
+                        Close
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </main>
@@ -280,6 +383,7 @@ var year_built = 0;
 var num_bath = 0;
 var num_floor = 0;
 var y_renovated = 0;
+var houseName = "";
 var num_bedroom = 0;
 var sqft_roof = 0;
 var sqft_basement = 0;
@@ -327,19 +431,53 @@ function setBedroom(p) {
   num_bedroom = p;
   console.log(num_bedroom);
 }
+function setName(p) {
+  houseName = p;
+  console.log(houseName);
+}
 
-function getJsonData() {
-  //bedrooms,bathrooms,sqft_living,sqft_lot,floors,sqft_above,sqft_basement,yr_built,yr_renovated
-  const array = [
-    num_bedroom,
-    num_bath,
-    sqft_living,
-    sqft_lot,
-    num_floor,
-    sqft_roof,
-    sqft_basement,
-    year_built,
-    y_renovated,
-  ];
-  return array;
+function getJsonData(i) {
+  if (i == 0) {
+    //bedrooms,bathrooms,sqft_living,sqft_lot,floors,sqft_above,sqft_basement,yr_built,yr_renovated
+    const array = [
+      num_bedroom,
+      num_bath,
+      sqft_living,
+      sqft_lot,
+      num_floor,
+      sqft_roof,
+      sqft_basement,
+      year_built,
+      y_renovated,
+    ];
+    return array;
+  } else if (i == 1) {
+    const array = {
+      bed: num_bedroom,
+      bath: num_bath,
+      living: sqft_living,
+      lot: sqft_lot,
+      floor: num_floor,
+      roof: sqft_roof,
+      basement: sqft_basement,
+      built: year_built,
+      renovated: y_renovated,
+      name: houseName,
+    };
+    return array;
+  }
+
+  return null;
+}
+
+let data = {};
+
+function setResult(p) {
+  data = p;
+
+  console.log("testing", data);
+}
+
+function getResult() {
+  return data;
 }
