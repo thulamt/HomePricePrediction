@@ -1,17 +1,24 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import classNames from "classnames";
-import Link from "next/link";
-import { Federant } from "next/font/google";
-import { Duplex } from "stream";
-import { document } from "postcss";
+import { useEffect } from "react";
+import { useAuthContext } from "@/context/AuthContext";
+
 import SideBar from "./savebar";
 import { useRouter } from "next/navigation";
 
 // @refresh reset
 
 export default function Home(prop) {
+  const { user } = useAuthContext();
+  useEffect(() => {
+    if (user == null) {
+      router.push("/");
+    } else {
+      router.push("/admin");
+    }
+  }, [user]);
+
   const router = useRouter();
   const [HomeData, setHomeData] = useState(null);
   const [savebar, setSaveBar] = useState(null);

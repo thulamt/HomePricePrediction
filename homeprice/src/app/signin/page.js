@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import signIn from "@/app/firebase/auth/signIn";
+import signIn from "@/firebase/auth/signIn";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
@@ -19,7 +19,7 @@ export default function Page() {
 
     // else successful
     console.log(result);
-    return router.push("/");
+    return router.push("/admin");
   };
   return (
     <main className="flex min-h-screen  overflow-hidden">
