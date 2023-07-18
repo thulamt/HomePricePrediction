@@ -221,14 +221,14 @@ export default function Page() {
   };
 
   return (
-    <main className=" min-h-screen">
+    <main className=" min-h-screen overflow-hidden">
       <div className="flex flex-row">
         <div
           className={wrapperClasses}
           style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
         >
           {/* bg-gradient-to-b from-[#581db5] to-[#5500b6] */}
-          <div className="relative shadow-2xl  min-h-screen max-h-screen shadow-innder bg-white ease-in-out duration-300 left-0 w-96">
+          <div className="flex flex-col   shadow-inner shadow-2xl shadow[#000000] bg-white ">
             <div className="flex   flex-row  p-9">
               <div className=" w-4/6 font-bold text-black text-2xl">
                 <p> Homes</p>
@@ -238,7 +238,7 @@ export default function Page() {
             <div className="flex w-full h-full  justify-center ">
               {/*                <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto     bg-slate-100 shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-lg ">
                */}
-              <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto  max-h-screen  min-h-screen  bg-white shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-xl  ">
+              <div className="  flex flex-col items-center   w-11/12  overflow-scroll    min-h-screen max-h-screen bg-white shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-xl  ">
                 <div className="hidden"> {count}</div>
 
                 {Object.keys(getResult()).map((key) => (
@@ -254,7 +254,7 @@ export default function Page() {
                     <button
                       type="button"
                       id={key}
-                      className=" flex justify-center items-center bg-rose-500 h-14 rounded-r-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#ff675c]"
+                      className=" flex justify-center items-center bg-gray-700 h-14 rounded-r-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg "
                       onClick={() => deleteDoc(key)}
                     >
                       <svg
