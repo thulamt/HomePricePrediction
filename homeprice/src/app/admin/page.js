@@ -345,8 +345,6 @@ export default function Page() {
                       onChange={handle_Y_renovated}
                     />
                   </div>
-                </div>
-                <div className="flex flex-row space space-x-20">
                   <div>
                     <p className="text-black"> Number of Bedroom</p>
                     <input
@@ -357,6 +355,8 @@ export default function Page() {
                       onChange={handle_Num_bedroom}
                     />
                   </div>
+                </div>
+                <div className="flex flex-row space space-x-20">
                   <div>
                     <p className="text-black"> Number of Bathroom</p>
                     <input
@@ -367,18 +367,19 @@ export default function Page() {
                       onChange={handle_Num_bathroom}
                     />
                   </div>
-                </div>
-                <div className="flex flex-row space space-x-20">
-                  <div>
-                    <p className="text-black"> Number of Floors</p>
-                    <input
-                      className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
-                      type="number"
-                      placeholder="0"
-                      value={num_floor}
-                      onChange={handle_Num_floor}
-                    />
+                  <div className="flex flex-row space space-x-20">
+                    <div>
+                      <p className="text-black"> Number of Floors</p>
+                      <input
+                        className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
+                        type="number"
+                        placeholder="0"
+                        value={num_floor}
+                        onChange={handle_Num_floor}
+                      />
+                    </div>
                   </div>
+
                   <div>
                     <p className="text-black"> Square Footage of the Lot</p>
                     <input
@@ -409,6 +410,16 @@ export default function Page() {
                       placeholder="0"
                       value={roof}
                       onChange={handle_roof}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-black"> Square Footage of Basement</p>
+                    <input
+                      className="rounded-md shadow-2xl w-full py- px-5 sm:text-md dark:text-black"
+                      type="number"
+                      placeholder="0"
+                      value={basement}
+                      onChange={handle_basement}
                     />
                   </div>
                 </div>
