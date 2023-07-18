@@ -243,57 +243,59 @@ export default function Page() {
   return (
     <main className=" min-h-screen overflow-hidden">
       <div className="flex flex-row">
-        <div
-          className={wrapperClasses}
-          style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
-        >
-          {/* bg-gradient-to-b from-[#581db5] to-[#5500b6] */}
-          <div className="flex flex-col   shadow-inner shadow-2xl shadow[#000000] bg-white ">
-            <div className="flex   flex-row  p-9">
-              <div className=" w-4/6 font-bold text-black text-2xl">
-                <p> Homes</p>
+        <div>
+          <div
+            className={wrapperClasses}
+            style={{ transition: "width 200ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
+          >
+            {/* bg-gradient-to-b from-[#581db5] to-[#5500b6] */}
+            <div className="flex flex-col   shadow-inner shadow-2xl shadow[#000000] bg-white ">
+              <div className="flex   flex-row  p-9">
+                <div className=" w-4/6 font-bold text-black text-2xl">
+                  <p> Homes</p>
+                </div>
               </div>
-            </div>
-            {/* bg-violet-700 */}
-            <div className="flex w-full h-full  justify-center ">
-              {/*                <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto     bg-slate-100 shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-lg ">
-               */}
-              <div className="  flex flex-col items-center   w-11/12  overflow-scroll    min-h-screen max-h-screen bg-white shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-xl  ">
-                <div className="hidden"> {count}</div>
+              {/* bg-violet-700 */}
+              <div className="flex w-full h-full  justify-center ">
+                {/*                <div className="  flex flex-col items-center   w-11/12   mb-24   overflow-auto     bg-slate-100 shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-lg ">
+                 */}
+                <div className="  flex flex-col items-center   w-11/12  overflow-scroll    min-h-screen max-h-screen bg-white shadow-[#17023b] shadow-2xl drop-shadow-3xl rounded-xl  ">
+                  <div className="hidden"> {count}</div>
 
-                {Object.keys(getResult()).map((key) => (
-                  <div className="flex flex-row justify-center items-center ">
-                    <button
-                      // className=" flex justify-center items-center  text-xl text-white  w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-xl  "
-                      className=" bg-gray-600 hover:bg-violet-400 text-lg  text-white-800   w-11/12 mt-5 w-64 h-14  pt-2 pb-2 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#999999]  items-center"
-                      onClick={() => autoFill(key)}
-                      placeholder={key}
-                    >
-                      {key}
-                    </button>
-                    <button
-                      type="button"
-                      id={key}
-                      className=" flex justify-center items-center bg-gray-800  h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
-                      onClick={() => deleteDoc(key)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2}
-                        stroke="currentColor"
-                        className="w-5 h-5 "
+                  {Object.keys(getResult()).map((key) => (
+                    <div className="flex flex-row justify-center items-center ">
+                      <button
+                        // className=" flex justify-center items-center  text-xl text-white  w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-xl  "
+                        className=" bg-gray-600 hover:bg-violet-400 text-lg  text-white-800   w-11/12 mt-5 w-64 h-14  pt-2 pb-2 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#999999]  items-center"
+                        onClick={() => autoFill(key)}
+                        placeholder={key}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                ))}
+                        {key}
+                      </button>
+                      <button
+                        type="button"
+                        id={key}
+                        className=" flex justify-center items-center bg-gray-800  h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
+                        onClick={() => deleteDoc(key)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2}
+                          stroke="currentColor"
+                          className="w-5 h-5 "
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
