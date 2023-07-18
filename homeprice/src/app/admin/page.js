@@ -322,7 +322,7 @@ export default function Page() {
                 <p> House Price Predictor</p>
               </div>
 
-              <div className="flex flex-col items-center mt-10 space-y-10">
+              <div className="flex flex-col items-center mt-10 space-y-20">
                 <div className="flex flex-row  space-x-20">
                   <div>
                     <p className="text-black"> Year Built</p>
@@ -379,7 +379,6 @@ export default function Page() {
                       />
                     </div>
                   </div>
-
                   <div>
                     <p className="text-black"> Square Footage of the Lot</p>
                     <input
@@ -415,7 +414,7 @@ export default function Page() {
                   <div>
                     <p className="text-black"> Square Footage of Basement</p>
                     <input
-                      className="rounded-md shadow-2xl w-full py- px-5 sm:text-md dark:text-black"
+                      className="rounded-md shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
                       value={basement}

@@ -8,9 +8,9 @@ export default function Page() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
-  function gotoSignIn() {
+  function gotoSignUP() {
     console.log("test");
-    router.push("/signin");
+    router.push("/signup");
   }
   const handleForm = async (event) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ export default function Page() {
       <div className="flex flex-col justify-center items-center w-full">
         <div className="flex flex-row h-1/2 justify-center items-center">
           <div className="flex flex-col bg-slate-100 shadow-md rounded-xl h-full p-10  ">
-            <h1 className=" flex justify-center pb-10    text-black">
+            <h1 className=" flex justify-center pb-10  text-xl  text-black">
               Sign In
             </h1>
             <form
@@ -64,7 +64,7 @@ export default function Page() {
               <div className="flex flex-row space-x-10">
                 <input
                   className="bg-gray-600 hover:bg-gray-400 text-[20px]  text-white-800 font-bold  py-2 px-10 rounded-xl  shadow-lg shadow-[#4f4f4f]  items-center"
-                  onClick={gotoSignIn}
+                  onClick={gotoSignUP}
                   type="button"
                   value={"Sign Up"}
                 />
