@@ -128,17 +128,19 @@ export default function Home(prop) {
                       onChange={(e) => setRenovated(e.target.value)}
                     />
                   </div>
+                  <div className="flex flex-row space space-x-20">
+                    <div>
+                      <p className="text-black"> Number of Bedroom</p>
+                      <input
+                        className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
+                        type="number"
+                        placeholder="0"
+                        onChange={(e) => setBedroom(e.target.value)}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="flex flex-row space space-x-20">
-                  <div>
-                    <p className="text-black"> Number of Bedroom</p>
-                    <input
-                      className="rounded-md shadow-2xl w-full py-2 px-5  sm:text-md dark:text-black"
-                      type="number"
-                      placeholder="0"
-                      onChange={(e) => setBedroom(e.target.value)}
-                    />
-                  </div>
                   <div>
                     <p className="text-black"> Number of Bathroom</p>
                     <input
@@ -148,8 +150,6 @@ export default function Home(prop) {
                       onChange={(e) => setBath(e.target.value)}
                     />
                   </div>
-                </div>
-                <div className="flex flex-row space space-x-20">
                   <div>
                     <p className="text-black"> Number of Floors</p>
                     <input
@@ -165,6 +165,7 @@ export default function Home(prop) {
                       className="rounded-md   shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
                       type="number"
                       placeholder="0"
+                      onChange={(e) => setLot(e.target.value)}
                     />
                   </div>
                 </div>
@@ -185,6 +186,15 @@ export default function Home(prop) {
                       type="number"
                       placeholder="0"
                       onChange={(e) => setRoof(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-black"> Square Footage of Basement</p>
+                    <input
+                      className="rounded-md shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
+                      type="number"
+                      placeholder="0"
+                      onChange={(e) => setBasement(e.target.value)}
                     />
                   </div>
                 </div>
