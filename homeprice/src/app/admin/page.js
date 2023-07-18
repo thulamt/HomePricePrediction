@@ -253,7 +253,7 @@ export default function Page() {
                     <button
                       type="button"
                       id={key}
-                      className=" flex justify-center items-center bg-violet-600  h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
+                      className=" flex justify-center items-center bg-gray-800  h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
                       onClick={() => deleteDoc(key)}
                     >
                       <svg
