@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "flask-dev": "FLASK_DEBUG=1 pip3 install -r requirements.txt && python3 -m flask --app backend/api/app run -p 5328",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -16,7 +17,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.2",
-     "firebase":"10.0.0",
-     "firebase-admin":"11.10.0"
+    "firebase": "10.0.0",
+    "firebase-admin": "11.10.0"
   }
 }
