@@ -41,7 +41,7 @@ export default function Page() {
   const [savebar, setSaveBar] = useState(null);
   const [count, setCount] = useState(0);
   const [delDoc, SetDelDoc] = useState(0);
-
+  const [houseName, setHouseName] = useState(false);
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState(null);
 
@@ -104,6 +104,24 @@ export default function Page() {
     setSaveBar(!savebar);
   };
 
+  const nameInput = classNames(
+    " rounded-md shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black ",
+    {
+      [" outline outline-offset-2 outline-red-500"]: !houseName,
+      ["outline outline-offset-2 outline-black-500"]: houseName,
+    }
+  );
+
+  const changeNamestate = (e) => {
+    if (e.target.value === "") {
+      console.log("test name false");
+      setHouseName(false);
+    } else {
+      setName(e.target.value);
+      console.log("test name true");
+      setHouseName(true);
+    }
+  };
   const fetchData = async () => {
     try {
       const response = await fetch("/api/hello");
@@ -144,18 +162,21 @@ export default function Page() {
     }
   };
 
-  const handleForm = async () => {
-    const { result, error } = await addData(
-      "users" + "/" + auth.currentUser.uid + "/homedata",
-      getJsonData(1).name,
-      getJsonData(1)
-    );
+  const SaveData = async () => {
+    if (houseName) {
+      const { result, error } = await addData(
+        "users" + "/" + auth.currentUser.uid + "/homedata",
+        getJsonData(1).name,
+        getJsonData(1)
+      );
 
-    if (error) {
-      return console.log(error);
+      if (error) {
+        return console.log(error);
+      }
+      handleForm2();
+      setResponse(false);
     }
-    handleForm2();
-    setResponse(false);
+    setHouseName(false);
   };
 
   const handleForm2 = async () => {
@@ -244,7 +265,7 @@ export default function Page() {
                   <div className="flex flex-row justify-center items-center ">
                     <button
                       // className=" flex justify-center items-center  text-xl text-white  w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-xl  "
-                      className=" bg-gray-600 hover:bg-violet-400 text-xl  text-white-800 font-bold  w-11/12 mt-5 w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#4e26ab]  items-center"
+                      className=" bg-gray-600 hover:bg-violet-400 text-lg  text-white-800   w-11/12 mt-5 w-64 h-14  pt-2 pb-2 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#999999]  items-center"
                       onClick={() => autoFill(key)}
                       placeholder={key}
                     >
@@ -301,10 +322,30 @@ export default function Page() {
                   />
                 </svg>
               </button>
-
-              <a>
-                <h1 className="text-3xl font-bold">ValueX </h1>
-              </a>
+              <button
+                className=" flex flex-row justify-center items-center space-x-2"
+                onClick={() => router.push("/")}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-8 h-8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  />
+                </svg>
+                <a>
+                  <h1 className="text-3xl font=[league spartan] font-bold">
+                    valueX{" "}
+                  </h1>
+                </a>
+              </button>
             </div>
             <div class="flex space-x-4">
               <button
@@ -448,17 +489,23 @@ export default function Page() {
                       <p className="text-base text-lg leading-relaxed text-gray-500 dark:text-gray-700">
                         {response.message}
                       </p>
-                      <input
-                        className="rounded-md shadow-2xl w-full py-2 px-5 sm:text-md dark:text-black"
-                        type="name"
-                        placeholder="Name for the Home"
-                        onChange={(e) => setName(e.target.value)}
-                      />
+                      <div>
+                        {!houseName && (
+                          <p className="text-md text-red-500 ">Required*</p>
+                        )}
+
+                        <input
+                          className={nameInput}
+                          type="name"
+                          placeholder="ex: Steve's Home"
+                          onChange={changeNamestate}
+                        />
+                      </div>
                     </div>
                     <div class="flex  justify-center p-6 space-x-10  rounded-b dark:border-gray-600">
                       <button
                         type="button"
-                        onClick={handleForm}
+                        onClick={SaveData}
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
                         Save
