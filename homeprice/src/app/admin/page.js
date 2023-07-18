@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useCallback } from "react";
-import { format } from "date-fns";
 import { updateCount } from "@/app/savebar";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -245,7 +244,7 @@ export default function Page() {
                   <div className="flex flex-row justify-center items-center ">
                     <button
                       // className=" flex justify-center items-center  text-xl text-white  w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-xl  "
-                      className="bg-violet-600 hover:bg-violet-400 text-xl  text-white-800 font-bold  w-11/12 mt-5 w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#4e26ab]  items-center"
+                      className=" bg-gray-600 hover:bg-violet-400 text-xl  text-white-800 font-bold  w-11/12 mt-5 w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#4e26ab]  items-center"
                       onClick={() => autoFill(key)}
                       placeholder={key}
                     >
@@ -254,7 +253,7 @@ export default function Page() {
                     <button
                       type="button"
                       id={key}
-                      className=" flex justify-center items-center bg-gray-700 h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
+                      className=" flex justify-center items-center bg-violet-600  h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
                       onClick={() => deleteDoc(key)}
                     >
                       <svg
@@ -309,7 +308,7 @@ export default function Page() {
             </div>
             <div class="flex space-x-4">
               <button
-                className="bg-slate-100 pr-5 pl-5   hover:scale-125 transition delay-150 duration-300 ease-in-out rounded shadow-md"
+                className="bg-slate-100 pr-5 pl-5   hover:scale-110 transition delay-150 duration-300 ease-in-out rounded shadow-md"
                 onClick={handleSignOut}
               >
                 <label className="text-black">Sign Out</label>
