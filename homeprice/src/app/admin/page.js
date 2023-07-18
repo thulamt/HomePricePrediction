@@ -245,7 +245,7 @@ export default function Page() {
                   <div className="flex flex-row justify-center items-center ">
                     <button
                       // className=" flex justify-center items-center  text-xl text-white  w-11/12 mt-5  shrink w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg shadow-xl  "
-                      className="bg-violet-600 hover:bg-violet-400 text-xl  text-white-800 font-bold  w-11/12 mt-5 w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg  shadow-lg shadow-[#4e26ab]  items-center"
+                      className="bg-violet-600 hover:bg-violet-400 text-xl  text-white-800 font-bold  w-11/12 mt-5 w-64 h-14  pt-5 pb-5 mb-5 rounded-l-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg shadow-[#4e26ab]  items-center"
                       onClick={() => autoFill(key)}
                       placeholder={key}
                     >
@@ -254,7 +254,7 @@ export default function Page() {
                     <button
                       type="button"
                       id={key}
-                      className=" flex justify-center items-center bg-gray-700 h-14 rounded-r-lg hover:scale-90  transition delay-150 duration-300 ease-in-out shadow-lg "
+                      className=" flex justify-center items-center bg-gray-700 h-14 rounded-r-lg hover:scale-110  transition delay-150 duration-300 ease-in-out shadow-md "
                       onClick={() => deleteDoc(key)}
                     >
                       <svg
