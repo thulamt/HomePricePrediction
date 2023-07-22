@@ -286,92 +286,44 @@ var sqft_living = 0;
 var sqft_lot = 0;
 
 function setYearBuilt(p) {
+  9;
   let date = new Date(p);
-  if(isNaN(date)){
-    year_built="0";
-  }else{
-    let year=date.getFullYear();
-    if(year<0){
-      year=0;
-    }
-    year_built = date.getFullYear().toString();
-  }
+  year_built = date.getFullYear().toString();
+
   console.log(year_built);
 }
 function setBath(p) {
   num_bath = p;
-  if(isNaN(num_bath)){
-    num_bath=0;
-  }else if(num_bath<0){
-    num_bath=0;
-  }
   console.log(num_bath);
 }
 function setFloor(p) {
   num_floor = p;
-  if(isNaN(num_floor)){
-    num_floor=0;
-  }else if(num_floor<0){
-    num_floor=0;
-  }
   console.log(num_floor);
 }
 function setLot(p) {
   sqft_lot = p;
-  if(isNaN(sqft_lot)){
-    sqft_lot=0;
-  }else if(sqft_lot<0){
-    sqft_lot=0;
-  }
   console.log(sqft_lot);
 }
 function setRoof(p) {
   sqft_roof = p;
-  if(isNaN(sqft_roof)){
-    sqft_roof=0;
-  }else if(sqft_roof<0){
-    sqft_roof=0;
-  }
   console.log(sqft_roof);
 }
 function setLiving(p) {
   sqft_living = p;
-  if(isNaN(sqft_living)){
-    sqft_living=0;
-  }else if(sqft_living<0){
-    sqft_living=0;
-  }
   console.log(sqft_living);
 }
 function setBasement(p) {
   sqft_basement = p;
-  if(isNaN(sqft_basement)){
-    sqft_basement=0;
-  }else if(sqft_basement<0){
-    sqft_basement=0;
-  }
   console.log(sqft_basement);
 }
 
 function setRenovated(p) {
   let date = new Date(p);
-  if(isNaN(date)){
-    y_renovated=0;
-  }else{
-    y_renovated = date.getFullYear();
-    if(y_renovated<0){
-      y_renovated=0;
-    }
-  }
+  y_renovated = date.getFullYear();
   console.log(y_renovated);
 }
 function setBedroom(p) {
   num_bedroom = p;
-  if(isNaN(num_bedroom)){
-    num_bedroom=0;
-  }else if(num_bedroom<0){
-    num_bedroom=0;
-  }
   console.log(num_bedroom);
 }
 
@@ -390,6 +342,7 @@ function getJsonData() {
   ];
   return array;
 }
+
 function hideModal() {}
 
 // import Image from "next/image";
@@ -408,25 +361,3 @@ function hideModal() {}
 //     </main>
 //   );
 // }
-//module.exports = { year_built, num_bath, num_floor, y_renovated, num_bedroom, sqft_roof, sqft_basement, sqft_living, sqft_lot};
-module.exports = {
-  setYearBuilt,
-  setBath,
-  setFloor,
-  setLot,
-  setRoof,
-  setLiving,
-  setBasement,
-  setRenovated,
-  setBedroom,
-  getJsonData,
-  year_built, 
-  num_bath, 
-  num_floor, 
-  y_renovated, 
-  num_bedroom, 
-  sqft_roof, 
-  sqft_basement, 
-  sqft_living, 
-  sqft_lot
-};
